@@ -22,25 +22,38 @@ jobs:
     - name: Generate Javadoc
       run: |
         javadoc -d docs/ -subpackages app
+        
+        git config --global user.name 'BOTFloindil'
+        git config --global user.email 'floindil@gmail.com'
+        
+        git add docs/
+        if [ -n "$(git status --porcelain)" ]; then
+          git commit -m "Update Javadoc"
+          git push origin main
+        else
+          echo "No Javadoc changes to commit"
+        fi
 
     - name: Deploy Javadoc to GitHub Pages
       run: |
-        git config --global user.name 'BOTFloindil'
-        git config --global user.email 'floindil@gmail.com'
-
-        # Fetch and checkout gh-pages branch
+        # Checkout the gh-pages branch
         git fetch origin gh-pages
         git checkout gh-pages || git checkout --orphan gh-pages
 
         # Remove old Javadoc files
         rm -rf *
 
-        # Copy new Javadoc files from the main branch
-        cp -r ../docs/* .
+        # Copy new Javadoc files from the docs directory in the main branch
+        git checkout main -- docs/
 
-        # Add and commit changes if there are any
+        # Move the docs files to the root directory
+        mv docs/* .
+        rmdir docs
+
+        # Add all files to the staging area
         git add .
 
+        # Commit and push changes if there are any
         if [ -n "$(git status --porcelain)" ]; then
           git commit -m "Automated Javadoc deployment"
           git push origin gh-pages --force
