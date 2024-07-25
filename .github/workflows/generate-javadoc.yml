@@ -33,5 +33,10 @@ jobs:
         git checkout gh-pages
 
         git add docs/.
-        git commit -m "Automated Javadoc deployment"
-        git push origin gh-pages --force
+
+        if [ -n "$(git status --porcelain)" ]; then
+          git commit -m "Automated Javadoc deployment"
+          git push origin gh-pages --force
+        else
+          echo "No changes to commit"
+        fi       
