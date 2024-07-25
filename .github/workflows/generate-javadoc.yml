@@ -26,7 +26,7 @@ jobs:
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
 
-        git checkout -t testing_things/tree/gh-pages
+        git checkout -t testing_things/gh-pages
 
         git add docs/.
         git commit -m "Automated Javadoc deployment"
