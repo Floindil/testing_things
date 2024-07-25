@@ -22,6 +22,7 @@ jobs:
     - name: Generate Javadoc
       run: |
         javadoc -d docs/ -subpackages app
+        git commit -m "Update Javadoc"
         
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
