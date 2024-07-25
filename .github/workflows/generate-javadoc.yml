@@ -26,6 +26,7 @@ jobs:
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
 
+        git add docs/.
         git commit -m "Update Javadoc"
 
         git fetch origin gh-pages
