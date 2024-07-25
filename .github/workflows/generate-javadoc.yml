@@ -21,12 +21,17 @@ jobs:
 
     - name: Generate Javadoc
       run: |
+        # Create Javadoc files
         javadoc -d docs/ -subpackages app
         
+        # Set user for updateing
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
         
+        # Add all files to the staging area
         git add docs/
+
+        # Commit and push changes if there are any
         if [ -n "$(git status --porcelain)" ]; then
           git commit -m "Update Javadoc"
           git push origin main
