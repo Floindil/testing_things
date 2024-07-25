@@ -26,6 +26,7 @@ jobs:
         git config --global user.name 'BOTFloindil'
         git config --global user.email 'floindil@gmail.com'
 
+        git fetch origin gh-pages
         git checkout gh-pages
 
         git add docs/.
